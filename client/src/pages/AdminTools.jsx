@@ -56,15 +56,9 @@ export default function AdminTools() {
   const removeUserImage = async (id) => {
     try {
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/users/${userId}/remove-image`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+        `${import.meta.env.VITE_API_URL}/users/${id}/remove-image`,
+        {}
       );
-
       toast.success("Profile picture removed");
       fetchData();
     } catch {

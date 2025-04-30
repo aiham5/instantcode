@@ -33,7 +33,7 @@ model Post {
   caption   String
   createdAt DateTime @default(now())
 
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 
   comments Comment[]
@@ -46,10 +46,10 @@ model Comment {
   content   String
   createdAt DateTime @default(now())
 
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 
-  post   Post @relation(fields: [postId], references: [id])
+  post   Post @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId Int
 
   likes Like[]
@@ -58,23 +58,23 @@ model Comment {
 model Like {
   id Int @id @default(autoincrement())
 
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 
-  post   Post? @relation(fields: [postId], references: [id])
+  post   Post? @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId Int?
 
-  comment   Comment? @relation(fields: [commentId], references: [id])
+  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
   commentId Int?
 }
 
 model Friend {
   id Int @id @default(autoincrement())
 
-  user   User @relation("UserFriends", fields: [userId], references: [id])
+  user   User @relation("UserFriends", fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 
-  addedBy   User @relation("FriendAddedBy", fields: [addedById], references: [id])
+  addedBy   User @relation("FriendAddedBy", fields: [addedById], references: [id], onDelete: Cascade)
   addedById Int
 
   createdAt DateTime @default(now())
@@ -83,9 +83,9 @@ model Friend {
 model Report {
   id        Int      @id @default(autoincrement())
   reason    String
-  post      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   createdAt DateTime @default(now())
 }
@@ -93,7 +93,7 @@ model Report {
 model Notification {
   id        Int      @id @default(autoincrement())
   message   String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   createdAt DateTime @default(now())
   read      Boolean  @default(false)
