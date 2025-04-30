@@ -51,11 +51,19 @@ export default function EditProfile() {
     }
 
     try {
-      await axios.put(`${import.meta.env.VITE_API_URL}/users/me`, {
-        name,
-        bio,
-        image: imageUrl,
-      });
+      await axios.put(
+        `${import.meta.env.VITE_API_URL}/users/me`,
+        {
+          name,
+          bio,
+          image: imageUrl,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
