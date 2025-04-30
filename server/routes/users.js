@@ -4,12 +4,13 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 const isAdmin = require("../middleware/isAdmin");
 
 router.put("/me", isLoggedIn, async (req, res) => {
-  const { bio, image } = req.body;
+  const { name, bio, image } = req.body;
 
   try {
     const user = await prisma.user.update({
       where: { id: req.user.id },
       data: {
+        username: name,
         bio,
         image: image === "REMOVE_IMAGE" ? null : image,
       },
