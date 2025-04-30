@@ -69,9 +69,7 @@ export default function Home() {
   const handleDelete = async (postId) => {
     const token = localStorage.getItem("token");
     const isAdmin = user?.role === "admin";
-    const route = isAdmin
-      ? `/api/posts/admin/${postId}`
-      : `/api/posts/${postId}`;
+    const route = isAdmin ? `/posts/admin/${postId}` : `/posts/${postId}`;
 
     try {
       await axios.delete(`${import.meta.env.VITE_API_URL}${route}`, {
