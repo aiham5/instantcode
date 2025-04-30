@@ -45,11 +45,19 @@ export default function CreatePost() {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.post(`${import.meta.env.VITE_API_URL}/posts`, {
-        image: imageUrl,
-        caption,
-        tags,
-      });
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/posts`,
+        {
+          image: imageUrl,
+          caption,
+          tags,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       toast.success("Post created!");
       navigate("/");
