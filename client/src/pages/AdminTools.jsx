@@ -61,7 +61,7 @@ export default function AdminTools() {
   const removeUserImage = async (id) => {
     try {
       await axios.put(
-        `${import.meta.env.VITE_API_URL}/users/${userId}/remove-image`,
+        `${import.meta.env.VITE_API_URL}/users/${id}/remove-image`,
         {},
         {
           headers: {
