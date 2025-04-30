@@ -50,13 +50,16 @@ export default function EditProfile() {
     }
 
     try {
-      await axios.put(`${import.meta.env.VITE_API_URL}/users/me`, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/users/me`, {
         bio,
         image: imageUrl,
       });
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/me`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/users/me`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       toast.success("Profile updated!");
       navigate(`/profile/${res.data.id}`);
@@ -71,7 +74,7 @@ export default function EditProfile() {
     if (token) {
       axios;
       axios
-        .get(`${import.meta.env.VITE_API_URL}/users/me`, {
+        .get(`${import.meta.env.VITE_API_URL}/api/users/me`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
