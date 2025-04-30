@@ -88,8 +88,8 @@ export default function PostDetails() {
 
     const route =
       user?.role === "admin"
-        ? `/api/comments/admin/${commentId}`
-        : `/api/comments/${commentId}`;
+        ? `/comments/admin/${commentId}`
+        : `/comments/${commentId}`;
 
     try {
       await axios.delete(`${import.meta.env.VITE_API_URL}${route}`, {
