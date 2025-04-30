@@ -5,6 +5,7 @@ import axios from "axios";
 import { handleAuthError } from "../utils/auth";
 
 export default function EditProfile() {
+  const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [image, setImage] = useState("");
   const [file, setFile] = useState(null);
@@ -51,6 +52,7 @@ export default function EditProfile() {
 
     try {
       await axios.put(`${import.meta.env.VITE_API_URL}/users/me`, {
+        name,
         bio,
         image: imageUrl,
       });
@@ -75,6 +77,7 @@ export default function EditProfile() {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
+          setName(res.data.username || "");
           setBio(res.data.bio || "");
           setImage(res.data.image || "");
         })
@@ -149,6 +152,14 @@ export default function EditProfile() {
               Remove Profile Picture
             </button>
           )}
+
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
 
           <textarea
             placeholder="Bio"
