@@ -7,11 +7,17 @@ require("./passport");
 
 const app = express();
 
+console.log("SESSION_SECRET:", process.env.SESSION_SECRET);
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+      secure: true,
+      sameSite: "none",
+    },
   })
 );
 
@@ -20,7 +26,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://instantcode-lilac.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
