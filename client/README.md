@@ -1,12 +1,46 @@
-# React + Vite
+# InstantCode
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+InstantCode is a fullstack app where coders can share code screenshots, like and comment on posts, get notifications, and manage profiles. Admins can also manage users.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- User auth with JWT  
+- Post, like, and comment  
+- Real-time notifications  
+- Admin dashboard  
+- Modern layout with clean design
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+git clone https://github.com/aiham5/instantcode.git
+cd instantcode
+```
+
+Install dependencies:
+
+```bash
+cd server
+npm install
+
+cd ../client
+npm install
+```
+
+Set up `.env` files in both `server` and `client`.
+
+Run the app:
+
+```bash
+# in one terminal
+cd server
+npm run dev
+```
+
+```bash
+# in another terminal
+cd client
+npm run dev
+```
+
+Visit [http://localhost:5173](http://localhost:5173) to get started.
