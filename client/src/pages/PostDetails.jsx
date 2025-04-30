@@ -15,7 +15,9 @@ export default function PostDetails() {
 
   const fetchPost = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/posts/${id}`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/posts/${id}`
+      );
       setPost(res.data);
     } catch {
       toast.error("Failed to load post");
@@ -26,9 +28,12 @@ export default function PostDetails() {
   const fetchUser = async () => {
     const token = localStorage.getItem("token");
     if (token) {
-      const res = await axios.get("${import.meta.env.VITE_API_URL}/api/users/me", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/users/me`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setUser(res.data);
     }
   };
@@ -45,7 +50,7 @@ export default function PostDetails() {
 
     try {
       await axios.post(
-        "${import.meta.env.VITE_API_URL}/api/comments",
+        `${import.meta.env.VITE_API_URL}/api/comments`,
         {
           postId: post.id,
           content: comment,
@@ -68,7 +73,7 @@ export default function PostDetails() {
 
     try {
       await axios.post(
-        "${import.meta.env.VITE_API_URL}/api/likes",
+        `${import.meta.env.VITE_API_URL}/api/likes`,
         { commentId },
         {
           headers: { Authorization: `Bearer ${token}` },

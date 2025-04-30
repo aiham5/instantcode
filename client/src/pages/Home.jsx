@@ -20,14 +20,16 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("${import.meta.env.VITE_API_URL}/api/posts/all");
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/posts/all`
+        );
         setPosts(res.data);
 
         const token = localStorage.getItem("token");
         if (token) {
           try {
             const userRes = await axios.get(
-              "${import.meta.env.VITE_API_URL}/api/users/me",
+              `${import.meta.env.VITE_API_URL}/api/users/me`,
               {
                 headers: { Authorization: `Bearer ${token}` },
               }
@@ -54,7 +56,7 @@ export default function Home() {
 
     try {
       await axios.post(
-        "${import.meta.env.VITE_API_URL}/api/likes",
+        `${import.meta.env.VITE_API_URL}/api/likes`,
         { postId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -88,7 +90,7 @@ export default function Home() {
 
     try {
       await axios.post(
-        "${import.meta.env.VITE_API_URL}/api/reports",
+        `${import.meta.env.VITE_API_URL}/api/reports`,
         { postId, reason },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -101,7 +103,9 @@ export default function Home() {
   };
 
   const reloadPosts = async () => {
-    const res = await axios.get("${import.meta.env.VITE_API_URL}/api/posts/all");
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/posts/all`
+    );
     setPosts(res.data);
   };
 

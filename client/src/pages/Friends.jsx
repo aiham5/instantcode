@@ -11,17 +11,17 @@ export default function Friends() {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("${import.meta.env.VITE_API_URL}/api/users/me", {
+        .get(`${import.meta.env.VITE_API_URL}/api/users/me`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => setUser(res.data));
       axios
-        .get("${import.meta.env.VITE_API_URL}/api/friends", {
+        .get(`${import.meta.env.VITE_API_URL}/api/friends`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => setFriends(res.data));
       axios
-        .get("${import.meta.env.VITE_API_URL}/api/users", {
+        .get(`${import.meta.env.VITE_API_URL}/api/users`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => setUsers(res.data));
@@ -30,23 +30,32 @@ export default function Friends() {
 
   const handleAdd = async (userId) => {
     await axios.post(
-      "${import.meta.env.VITE_API_URL}/api/friends",
+      `${import.meta.env.VITE_API_URL}/api/friends`,
       { userId },
       { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
     );
-    const updated = await axios.get("${import.meta.env.VITE_API_URL}/api/friends", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    });
+    const updated = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/friends`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    );
     setFriends(updated.data);
   };
 
   const handleRemove = async (userId) => {
-    await axios.delete(`${import.meta.env.VITE_API_URL}/api/friends/${userId}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    });
-    const updated = await axios.get("${import.meta.env.VITE_API_URL}/api/friends", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    });
+    await axios.delete(
+      `${import.meta.env.VITE_API_URL}/api/friends/${userId}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    );
+    const updated = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/friends`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
+    );
     setFriends(updated.data);
   };
 

@@ -7,7 +7,7 @@ export default function Notifications() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("${import.meta.env.VITE_API_URL}/api/notifications", {
+      .get(`${import.meta.env.VITE_API_URL}/api/notifications`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setList(res.data));
