@@ -13,7 +13,7 @@ export default function Profile() {
     const fetchProfile = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/users/${id}`
+          `${import.meta.env.VITE_API_URL}/users/${id}`
         );
         setProfile(res.data);
       } catch {
@@ -28,7 +28,7 @@ export default function Profile() {
       if (token) {
         try {
           const res = await axios.get(
-            `${import.meta.env.VITE_API_URL}/api/users/me`,
+            `${import.meta.env.VITE_API_URL}/users/me`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }

@@ -10,7 +10,7 @@ export default function Navbar() {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get(`${import.meta.env.VITE_API_URL}/api/users/me`, {
+        .get(`${import.meta.env.VITE_API_URL}/users/me`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => setUser(res.data))
