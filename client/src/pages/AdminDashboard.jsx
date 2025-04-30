@@ -8,7 +8,7 @@ export default function AdminDashboard() {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("http://localhost:3000/api/users", {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);
@@ -22,11 +22,8 @@ export default function AdminDashboard() {
 
     try {
       await axios.put(
-        `http://localhost:3000/api/users/${userId}/remove-image`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        `${import.meta.env.VITE_API_URL}/users/${userId}/remove-image`,
+        {}
       );
       toast.success("Profile picture removed");
       fetchUsers();

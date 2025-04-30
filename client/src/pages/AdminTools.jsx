@@ -10,10 +10,10 @@ export default function AdminTools() {
   const fetchData = async () => {
     try {
       const [userRes, reportRes] = await Promise.all([
-        axios.get("http://localhost:3000/api/users", {
+        axios.get(`${import.meta.env.VITE_API_URL}/users`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        axios.get("http://localhost:3000/api/reports", {
+        axios.get(`${import.meta.env.VITE_API_URL}/reports`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -31,11 +31,8 @@ export default function AdminTools() {
   const promote = async (id) => {
     try {
       await axios.put(
-        `http://localhost:3000/api/users/${id}/promote`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        `${import.meta.env.VITE_API_URL}/users/${id}/promote`,
+        {}
       );
       toast.success("User promoted");
       fetchData();
@@ -46,7 +43,7 @@ export default function AdminTools() {
 
   const removeUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/api/users/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("User deleted");
@@ -59,11 +56,8 @@ export default function AdminTools() {
   const removeUserImage = async (id) => {
     try {
       await axios.put(
-        `http://localhost:3000/api/users/${id}/remove-image`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
+        `${import.meta.env.VITE_API_URL}/users/${id}/remove-image`,
+        {}
       );
       toast.success("Profile picture removed");
       fetchData();
@@ -74,9 +68,12 @@ export default function AdminTools() {
 
   const deletePost = async (postId) => {
     try {
-      await axios.delete(`http://localhost:3000/api/posts/admin/${postId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `${import.meta.env.VITE_API_URL}/posts/admin/${postId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       toast.success("Post deleted");
       fetchData();
     } catch {

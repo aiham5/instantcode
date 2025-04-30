@@ -41,7 +41,7 @@ router.get(
   async (req, res) => {
     const jwt = require("jsonwebtoken");
     const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET);
-    res.redirect(`http://localhost:5173/oauth-redirect?token=${token}`);
+    res.redirect(`https://instantcode-lilac.vercel.app/oauth-redirect?token=${token}`);
   }
 );
 

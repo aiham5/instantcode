@@ -50,15 +50,11 @@ export default function EditProfile() {
     }
 
     try {
-      await axios.put(
-        "http://localhost:3000/api/users/me",
-        { bio, image: imageUrl },
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      const res = await axios.get("http://localhost:3000/api/users/me", {
+      await axios.put(`${import.meta.env.VITE_API_URL}/users/me`, {
+        bio,
+        image: imageUrl,
+      });
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -73,8 +69,9 @@ export default function EditProfile() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
+      axios;
       axios
-        .get("http://localhost:3000/api/users/me", {
+        .get(`${import.meta.env.VITE_API_URL}/users/me`, {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {

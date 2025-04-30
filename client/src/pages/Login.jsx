@@ -9,7 +9,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/login", {
+      const res = await axios.post("${import.meta.env.VITE_API_URL}/api/auth/login", {
         email,
         password,
       });
@@ -59,7 +59,7 @@ export default function Login() {
           </button>
         </form>
         <hr style={{ margin: "20px 0" }} />
-        <a href="http://localhost:3000/api/auth/google">
+        <a href="https://instantcode.onrender.com/api/auth/google">
           <button style={{ width: "100%" }}>Login with Google</button>
         </a>
       </div>

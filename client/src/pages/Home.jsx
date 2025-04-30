@@ -20,14 +20,14 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/posts/all");
+        const res = await axios.get("${import.meta.env.VITE_API_URL}/api/posts/all");
         setPosts(res.data);
 
         const token = localStorage.getItem("token");
         if (token) {
           try {
             const userRes = await axios.get(
-              "http://localhost:3000/api/users/me",
+              "${import.meta.env.VITE_API_URL}/api/users/me",
               {
                 headers: { Authorization: `Bearer ${token}` },
               }
@@ -54,7 +54,7 @@ export default function Home() {
 
     try {
       await axios.post(
-        "http://localhost:3000/api/likes",
+        "${import.meta.env.VITE_API_URL}/api/likes",
         { postId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -72,7 +72,7 @@ export default function Home() {
       : `/api/posts/${postId}`;
 
     try {
-      await axios.delete(`http://localhost:3000${route}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}${route}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Deleted post");
@@ -88,7 +88,7 @@ export default function Home() {
 
     try {
       await axios.post(
-        "http://localhost:3000/api/reports",
+        "${import.meta.env.VITE_API_URL}/api/reports",
         { postId, reason },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -101,7 +101,7 @@ export default function Home() {
   };
 
   const reloadPosts = async () => {
-    const res = await axios.get("http://localhost:3000/api/posts/all");
+    const res = await axios.get("${import.meta.env.VITE_API_URL}/api/posts/all");
     setPosts(res.data);
   };
 

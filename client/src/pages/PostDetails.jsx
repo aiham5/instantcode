@@ -15,7 +15,7 @@ export default function PostDetails() {
 
   const fetchPost = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/posts/${id}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/posts/${id}`);
       setPost(res.data);
     } catch {
       toast.error("Failed to load post");
@@ -26,7 +26,7 @@ export default function PostDetails() {
   const fetchUser = async () => {
     const token = localStorage.getItem("token");
     if (token) {
-      const res = await axios.get("http://localhost:3000/api/users/me", {
+      const res = await axios.get("${import.meta.env.VITE_API_URL}/api/users/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUser(res.data);
@@ -45,7 +45,7 @@ export default function PostDetails() {
 
     try {
       await axios.post(
-        "http://localhost:3000/api/comments",
+        "${import.meta.env.VITE_API_URL}/api/comments",
         {
           postId: post.id,
           content: comment,
@@ -68,7 +68,7 @@ export default function PostDetails() {
 
     try {
       await axios.post(
-        "http://localhost:3000/api/likes",
+        "${import.meta.env.VITE_API_URL}/api/likes",
         { commentId },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -90,7 +90,7 @@ export default function PostDetails() {
         : `/api/comments/${commentId}`;
 
     try {
-      await axios.delete(`http://localhost:3000${route}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}${route}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Comment deleted");
